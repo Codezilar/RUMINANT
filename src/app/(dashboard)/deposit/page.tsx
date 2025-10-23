@@ -7,7 +7,7 @@ import { IoNavigateCircleOutline } from "react-icons/io5";
 
 const page = () => {
         const [copied, setCopied] = useState(false);
-        const address = 'bc1q4p3sgwq5052glcrjwu4rs48m0qtpfnkpzjezeh';
+        const address = 'bc1q8pr8h206plxct55s925vh6aghwh9dlvzmwtz2m';
     
         const copyToClipboard = () => {
             navigator.clipboard.writeText(address);
@@ -33,7 +33,7 @@ const page = () => {
         <div className="address">
             <p>Bitcoin Address:</p>
             <div className="address_p">
-                <p>bc1q4p3sgwq5052glcrjwu4rs48m0qtpfnkpzjezeh</p>
+                <p>bc1q8pr8h206plxct55s925vh6aghwh9dlvzmwtz2m</p>
             </div>
             <div className="address-btns">
                 <button  onClick={copyToClipboard}>
