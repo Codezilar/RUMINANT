@@ -112,7 +112,7 @@ const Containers = () => {
             <p>You're interested in: <strong>{selectedProperty.name}</strong></p>
             <div className="modal-actions">
               <button onClick={() => setSelectedProperty(null)}>Cancel</button>
-              <Link href={"https://wa.me/+14642607739"} target="_blank">
+              <Link href={"https://wa.me/+12562663897"} target="_blank">
                 <button className="primary">Contact Agent</button>
               </Link>
             </div>

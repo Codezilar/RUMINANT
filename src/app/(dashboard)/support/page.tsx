@@ -8,7 +8,7 @@ import { TfiHandPointDown } from "react-icons/tfi";
 import Link from 'next/link';
 
 const page = () => {
-    const [state, handleSubmit] = useForm("mzzagkka");
+    const [state, handleSubmit] = useForm("meoryjqq");
 
   return (
     <div className='dashboard support-form'>
@@ -18,7 +18,7 @@ const page = () => {
             <h1>Submit a Support Ticket</h1>
             <p>Fill out the form below to create a support ticket.</p>
           </div>
-          <form action="https://formspree.io/f/meoldaqg"  // Demo Formspree ID - replace with yours
+          <form action="https://formspree.io/f/meoryjqq"  // Demo Formspree ID - replace with yours
         method="POST" >
               <div className="suppot-info">
                 <div className="support-cred">
@@ -66,7 +66,7 @@ const page = () => {
                 </h2>
               </div>
           </form>
-          <Link href={"https://wa.me/+14642607739"} target="_blank">
+          <Link href={"https://wa.me/+12562663897"} target="_blank">
             <button className='bg-blue-400 flex w-full h-[5rem]  cursor-pointer justify-center items-center gap-3 rounded-[10px]'>
               <p className='font-extrabold'>WhatsApp</p>
               <SiWhatsapp className='text-3xl' />
