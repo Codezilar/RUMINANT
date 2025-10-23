@@ -10,7 +10,7 @@ const Choose = () => {
     <div className='choose'>
         <div className="choose-container">
             <div className="choose-top">
-                <h1>Why Choose Kingadox Bank</h1>
+                <h1>Why Choose Ruminant Bank</h1>
                 <p>Experience next-generation banking with our comprehensive suite of financial solutions designed for the digital age.</p>
             </div>
             <div className="choose-wrapp">

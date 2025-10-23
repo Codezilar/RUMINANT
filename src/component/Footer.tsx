@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="uppper-footer">
                 <div className="upper-footer-content">
                     <div className="footer-top">
-                        <span className='theme-gradient'>Kingadox Bank</span>
+                        <span className='theme-gradient'>Ruminant Bank</span>
                     </div>
                     <p>
                         Become part of the most exciting communities in the world. Explore new horizons, achieve the impossible, and make a difference - all while having fun and earning rewards. It's that simple.
