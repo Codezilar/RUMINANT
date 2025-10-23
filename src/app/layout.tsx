@@ -5,7 +5,7 @@ import {
 } from '@clerk/nextjs'
 
 export const metadata: Metadata = {
-  title: "Kingadox",
+  title: "Ruminant Bank",
   description: "Experience the future of banking with our secure innovative, and user-friendly platform designed for modern financial needs.",
 };
 
