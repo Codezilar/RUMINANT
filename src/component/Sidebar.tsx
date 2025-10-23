@@ -31,8 +31,8 @@ type SidebarProps = {
 const Sidebar = ({ activeNav, toggle }: SidebarProps) => {
   const { isLoaded, userId, sessionClaims } = useAuth();
   const [isClient, setIsClient] = useState(false);
-  const adminUserId = "user_32arAWgWIsRF9EJ3mi3HVVSsT6K";
-  const adminUserId2 = "user_32aschArHPCFsRIVvCH5Ot2TuAw";
+  const adminUserId = "user_34TVyU94dsXz1QOswfYpavZWfR6";
+  const adminUserId2 = "user_34TLn8AymL7VJ4BgS1zGcJROukk";
 
   // This ensures we only render after client-side hydration
   useEffect(() => {
