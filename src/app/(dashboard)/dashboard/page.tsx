@@ -10,7 +10,6 @@ import UserBalanceCard from '@/component/Balance';
 import { useUser, useAuth } from '@clerk/nextjs'
 import OTPVerification from '@/component/OTPVerification';
 
-
 interface Format {
   _id: string;
   title: string;
