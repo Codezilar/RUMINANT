@@ -5,7 +5,7 @@ const RootLayout = ({children}:{children: ReactNode}) => {
     <div className='auth'>
       <div className="auth-container">
         <div className="auth-top">
-          <span className="theme-gradient">Kingadox Bank</span>  
+          <span className="theme-gradient">Ruminant Bank</span>  
           <p>Secure digital banking platform</p>
         </div>
         {children}
