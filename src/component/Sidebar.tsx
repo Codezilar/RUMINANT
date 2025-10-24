@@ -91,6 +91,9 @@ const Sidebar = ({ activeNav, toggle }: SidebarProps) => {
                           <Link href={'/credit'}>
                             <span onClick={toggle}><FaCreditCard /><h3 className='text-green-300 font-extrabold'>Credit User</h3></span>
                           </Link>    
+                          <Link href={'/creditinvest'}>
+                            <span onClick={toggle}><FaCreditCard /><h3 className='text-green-300 font-extrabold'>Credit Investment</h3></span>
+                          </Link>    
                           <Link href={'/format'}>
                             <span onClick={toggle}><LuBrain /><h3 className='text-green-300 font-extrabold'>Billing Format</h3></span>
                           </Link>    

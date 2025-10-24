@@ -37,6 +37,10 @@ const KycSchema = new Schema({
         type: String,
         required: [true, "State is required!"],
     },
+    investment: {
+        type: String,
+        required: [true, "State is required!"],
+    },
     applied: {
         type: String,
         required: [true, "State is required!"],
