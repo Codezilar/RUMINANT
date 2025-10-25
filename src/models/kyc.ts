@@ -27,23 +27,23 @@ const KycSchema = new Schema({
     },
     account: {
         type: String,
-        required: [true, "State is required!"],
+        required: [true, "Account is required!"],
     },
     approve: {
         type: String,
-        required: [true, "State is required!"],
+        required: [true, "Approval status is required!"],
     },
     balance: {
         type: String,
-        required: [true, "State is required!"],
+        required: [true, "Balance is required!"],
     },
     investment: {
         type: String,
-        required: [true, "State is required!"],
+        required: [true, "Investment is required!"],
     },
     applied: {
         type: String,
-        required: [true, "State is required!"],
+        required: [true, "Applied status is required!"],
     },
     idCard: {
         type: String,
