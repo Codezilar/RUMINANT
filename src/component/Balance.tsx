@@ -57,7 +57,7 @@ const UserBalanceCard: React.FC = () => {
       setBalanceData(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      setBalanceError(`Error loading balance data: ${errorMessage}`);
+      setBalanceError(`0.00`);
       console.error('Balance fetch error:', err);
     } finally {
       setBalanceLoading(false);
