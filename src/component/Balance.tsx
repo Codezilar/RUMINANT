@@ -268,7 +268,6 @@ const UserBalanceCard: React.FC = () => {
           </div>
           <h1>${formattedInvestment}</h1>
           <p>Investment Account</p>
-          {investmentError && <p className="error-text">{investmentError}</p>}
         </div>
       </div>
 
