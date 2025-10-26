@@ -96,7 +96,7 @@ const page = () => {
                     <h3>Account Number *</h3>
                     <input 
                       type="text" 
-                      placeholder='Kingadox account number' 
+                      placeholder='Ruminant account number' 
                       value={accountNumber}
                       onChange={(e) => setAccountNumber(e.target.value)}
                       required
