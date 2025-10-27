@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectMongoDB from '@/lib/mongodb';
 import Kyc from '@/models/kyc';
+import History from '@/models/History';
 
 export async function PATCH(request: NextRequest) {
   try {
@@ -36,6 +37,14 @@ export async function PATCH(request: NextRequest) {
       { balance: newBalance.toString() },
       { new: true, runValidators: true }
     );
+
+    // Create transaction history record using your simple schema
+    const historyRecord = new History({
+      clerkId: user.clerkId,
+      amount: amount.toString()
+    });
+
+    await historyRecord.save();
 
     return NextResponse.json({
       message: "Balance updated successfully",
