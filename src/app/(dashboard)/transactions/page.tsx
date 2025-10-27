@@ -6,6 +6,7 @@ import { IoMdSwap } from "react-icons/io";
 import { FaBtc } from "react-icons/fa";
 import Image from 'next/image';
 import { useUser, useAuth } from '@clerk/nextjs'
+import TransactionHistory from '@/component/TransactionHistory';
 
 
 interface Withdrawal {
@@ -59,7 +60,7 @@ const page = () => {
                         </div>
                         <button>Search</button>
                     </div>
-                    <div className="transaction-box">
+                    {/* <div className="transaction-box">
                         {(withdrawal && withdrawal.approve === "") ? (
                             <>
                                 <Image src={'/trans.webp'} height={150} width={150} alt='kjh' />
@@ -92,7 +93,8 @@ const page = () => {
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
+                    <TransactionHistory />
                 </div>
             </div>
         </div>

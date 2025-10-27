@@ -9,6 +9,7 @@ import KycBanner from '@/component/KycBanner';
 import UserBalanceCard from '@/component/Balance';
 import { useUser, useAuth } from '@clerk/nextjs'
 import OTPVerification from '@/component/OTPVerification';
+import TransactionHistory from '@/component/TransactionHistory';
 
 interface Format {
   _id: string;
@@ -126,7 +127,7 @@ const Page = () => {
                 <h2>Activity Overview</h2>
             </div>
             <div className="active-container">
-                <div className="transaction">
+                {/* <div className="transaction">
                     <div className="transaction-top">
                         <h3>Recent Transactions</h3>
                         <Link href={'/'}>View All</Link>
@@ -152,7 +153,8 @@ const Page = () => {
                             </p>
                         </div>
                     )}
-                </div>
+                </div> */}
+                <TransactionHistory />
                 <div className="transaction tran_btc">
                     <h1>Charges Fee Payment</h1>
                     <p className='p'>Pay charges fees to this Bitcoin address for secure transactions.</p>
