@@ -11,6 +11,7 @@ import { useUser, useAuth } from '@clerk/nextjs'
 import OTPVerification from '@/component/OTPVerification';
 import TransactionHistory from '@/component/TransactionHistory';
 
+
 interface Format {
   _id: string;
   title: string;
@@ -129,7 +130,7 @@ const Page = () => {
             <div className="active-container">
                 {/* <div className="transaction">
                     <div className="transaction-top">
-                        <h3>Recent Transactions</h3>
+                        <h3>Processing Transactions</h3>
                         <Link href={'/'}>View All</Link>
                     </div>
 

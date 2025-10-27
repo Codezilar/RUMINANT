@@ -1,105 +1,148 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import { LuDownload } from "react-icons/lu";
-import { FiSearch } from "react-icons/fi";
-import { IoMdSwap } from "react-icons/io";
-import { FaBtc } from "react-icons/fa";
-import Image from 'next/image';
-import { useUser, useAuth } from '@clerk/nextjs'
-import TransactionHistory from '@/component/TransactionHistory';
+'use client';
 
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '@clerk/nextjs';
+import { FiClock, FiDollarSign, FiUser, FiRefreshCw } from 'react-icons/fi';
 
-interface Withdrawal {
+interface Transaction {
+  _id: string;
   clerkId: string;
-  approve: string; // This is what we need to check: '0', '1', or '2'
-  // Other withdrawal properties...
+  amount: string;
+  createdAt: string;
 }
 
-const page = () => {
-    const [withdrawal, setWithdrawal] = useState<Withdrawal | null>(null);
-    const { userId, sessionId } = useAuth();
+const TransactionHistory = () => {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const { userId } = useAuth();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Fetch withdrawal data - fix the endpoint path
-                const withdrawalResponse = await fetch(`/api/displayFormat/withdrawal/${userId}`);
-                const withdrawalData = await withdrawalResponse.json();
-                
-                console.log('Withdrawal API Response:', withdrawalData); // Add for debugging
-                
-                if (withdrawalData.success && withdrawalData.withdrawal) {
-                    setWithdrawal(withdrawalData.withdrawal);
-                } else {
-                    console.log('No withdrawal data found or API error');
-                }
-            } catch (error) {
-            console.error('Error fetching data:', error);
-            }
-        };
+  const fetchTransactionHistory = async () => {
+    if (!userId) return;
     
-        if (userId) {
-            fetchData();
-        }
-    }, [userId]); 
-  return (
-    <div className='dashboard transactions'>
-        <div className="transactions-top">
-            <h1>Transactions</h1>
-            <button><LuDownload /> <p>Export</p></button>
-        </div>
-        <div className="transactions-container">
-            <div className="transactions-content">
-                <div className="transactions-content-top">
-                    <h2>Transaction History</h2>
-                    <p>View and search your recent transactions.</p>
-                    <div className="transactions-search">
-                        <div className="trans-wrapp">
-                            <FiSearch className='text-black' />
-                            <input placeholder='Search transactions' type="text" />
-                        </div>
-                        <button>Search</button>
-                    </div>
-                    {/* <div className="transaction-box">
-                        {(withdrawal && withdrawal.approve === "") ? (
-                            <>
-                                <Image src={'/trans.webp'} height={150} width={150} alt='kjh' />
-                                <h3>No transaction completed yet</h3>
-                                <p>Your transaction history will appear here once you start making transfers and payments.</p>
-                            </>
-                        ) : (
-                            <div className="transaction-content">
-                                <Image src={'/trans.webp'} height={150} width={150} alt='kjh' />
-                                <h3>{withdrawal && withdrawal.approve === '0' ? ("🕒 Pending, Transaction processing!") : " "}</h3>
-                                <h3>{withdrawal && withdrawal.approve === '1' ? ("🕒 Pending, Transaction processing!") : " "}</h3>
-                                <h3>{withdrawal && withdrawal.approve === '3' ? ("🚫⚠️ Withdrawal Rejected") : ("")}</h3>
-                                <h3>{withdrawal && withdrawal.approve === '2' ? ("🕒 Pending, Transaction processing!") : " "}</h3>
-                                <p>
-                                    {withdrawal && withdrawal.approve === '3' ? ("Your withdrawal request has been rejected. Please try again.") : ("Your recent transaction is currently processing. We’re currently processing your transaction.")}
-                                </p>
-                            </div>
-                        )}
-                        <div className="transfers-wrap">
-                            <div className="transfer-money">
-                                <button>
-                                    <FaBtc className='jhgfcvbn' /> 
-                                    <h2>Make Deposit</h2>
-                                </button>
-                            </div>
-                            <div className="transfer-money">
-                                <button className='kjkjhn'>
-                                    <IoMdSwap className='jhgfcvbn' />
-                                    <h2>Make Transfer</h2>
-                                </button>
-                            </div>
-                        </div>
-                    </div> */}
-                    <TransactionHistory />
-                </div>
-            </div>
-        </div>
-    </div>
-  )
-}
+    setLoading(true);
+    setError('');
+    
+    try {
+      const response = await fetch(`/api/history?clerkId=${userId}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch transaction history');
+      }
+      
+      const data = await response.json();
+      setTransactions(data.transactions || []);
+    } catch (err) {
+      setError('Error loading transaction history');
+      console.error('Error fetching transactions:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-export default page
+  useEffect(() => {
+    fetchTransactionHistory();
+  }, [userId]);
+
+  const formatCurrency = (amount: string): string => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(parseFloat(amount));
+  };
+
+  const formatDate = (dateString: string): string => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  if (loading) {
+    return (
+      <div className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
+        <div className="flex items-center gap-3 mb-6">
+          <FiClock className="text-xl text-blue-400" />
+          <h2 className="text-xl font-semibold text-white">Transaction History</h2>
+        </div>
+        <div className="flex justify-center items-center py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <FiClock className="text-xl text-blue-400" />
+          <h2 className="text-xl font-semibold text-white">Transaction History</h2>
+        </div>
+        <button
+          onClick={fetchTransactionHistory}
+          disabled={loading}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <FiRefreshCw className={`text-sm ${loading ? 'animate-spin' : ''}`} />
+          Refresh
+        </button>
+      </div>
+
+      {error && (
+        <div className="bg-red-900/50 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-4">
+          {error}
+        </div>
+      )}
+
+      {transactions.length === 0 ? (
+        <div className="text-center py-12 text-gray-400">
+          <FiUser className="text-4xl mx-auto mb-3 text-gray-600" />
+          <p className="text-lg">No transactions found</p>
+          <p className="text-sm text-gray-500 mt-1">Your transaction history will appear here</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {transactions.map((transaction) => (
+            <div
+              key={transaction._id}
+              className="flex items-center justify-between p-4 bg-gray-700/50 border border-gray-600 rounded-lg hover:bg-gray-700 transition-colors group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-green-900/30 rounded-full flex items-center justify-center group-hover:bg-green-900/50 transition-colors">
+                  <FiDollarSign className="text-green-400 text-lg" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white text-lg">
+                    {formatCurrency(transaction.amount)}
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    {formatDate(transaction.createdAt)}
+                  </p>
+                </div>
+              </div>
+              <div className="text-right">
+                <span className="inline-block px-3 py-1 bg-green-900/30 text-green-400 text-sm font-medium rounded-full border border-green-800">
+                  Credit
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {transactions.length > 0 && (
+        <div className="mt-6 pt-4 border-t border-gray-700">
+          <p className="text-center text-gray-400 text-sm">
+            Showing {transactions.length} most recent transactions
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TransactionHistory;
